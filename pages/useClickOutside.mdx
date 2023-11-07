@@ -1,0 +1,25 @@
+# useClickOutside
+
+Detect clicks outside a specified element. This is particularly useful for closing modal windows, dropdowns, or resetting states when the user clicks outside of a component.
+
+```jsx
+import { useRef } from 'react';
+import { useClickOutside } from 'hooked-on-react';
+
+const SomeComponent = () => {
+  const ref = useRef();
+
+  useClickOutside(ref, () => {
+    // Your custom logic here
+    console.log('Clicked outside');
+  });
+
+  return (
+    <div>
+      <div ref={ref}>
+        <p>Click outside of this element to trigger the callback</p>
+      </div>
+    </div>
+  );
+};
+```

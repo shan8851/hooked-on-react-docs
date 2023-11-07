@@ -1,0 +1,24 @@
+# useDebounce
+
+Debounce a value or a callback, which delays the execution until after a specified wait time. This hook is ideal for performing tasks like API calls in response to user input.
+
+```jsx
+import { useState } from 'react';
+import { useDebounce } from 'hooked-on-react';
+
+const SearchInput = () => {
+  const [value, setValue] = useState('');
+  const debouncedValue = useDebounce(value, 500);
+
+  // Use debouncedValue for API calls or expensive operations
+
+  return (
+    <input
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+};
+
+```
