@@ -1,0 +1,33 @@
+# useLocalStorage
+
+The `useLocalStorage` hook simplifies the synchronisation of the component state with the browser's `localStorage`. It allows you to persist, update, and delete a value through the `localStorage` API, ensuring that the state persists across browser sessions.
+
+
+```jsx
+import { useLocalStorage } from 'hooked-on-react';
+
+const UserSettings = () => {
+  const { storedValue: settings, setValue: setSettings, deleteValue: clearSettings } = useLocalStorage('settings', {});
+
+  const updateSettings = (newSettings) => {
+    setSettings((prevSettings) => ({ ...prevSettings, ...newSettings }));
+  };
+
+  const handleThemeChange = (theme) => {
+    updateSettings({ theme });
+  };
+
+  const handleClearSettings = () => {
+    clearSettings();
+  };
+
+  return (
+    <div>
+      <button onClick={() => handleThemeChange('dark')}>Dark Theme</button>
+      <button onClick={() => handleThemeChange('light')}>Light Theme</button>
+      <button onClick={handleClearSettings}>Clear Settings</button>
+      {settings && <pre>{JSON.stringify(settings, null, 2)}</pre>}
+    </div>
+  );
+};
+```

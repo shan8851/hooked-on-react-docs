@@ -2,6 +2,8 @@
   "index": "Quick start",
   "useClickOutside": "useClickOutside",
   "useDebounce": "useDebounce",
+  "useLocalStorage": "useLocalStorage",
+  "useCopyText": "useCopyText",
   "contact": {
     "title": "Contact ↗",
     "type": "page",

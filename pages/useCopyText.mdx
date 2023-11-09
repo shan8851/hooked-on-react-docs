@@ -1,0 +1,30 @@
+# useCopyText
+
+Copy text to the clipboard with ease. useCopyText provides a simple API to copy text to the user's clipboard, with feedback on whether the copy was successful.
+
+```jsx
+import { useState } from 'react';
+import { useCopyText } from 'hooked-on-react';
+
+const CopyExample = () => {
+  const [text, setText] = useState('Hello, world!');
+  const { copy, isCopySuccess } = useCopyText();
+
+  const handleCopy = () => {
+    copy(text);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Text to copy"
+      />
+      <button onClick={handleCopy}>Copy to Clipboard</button>
+      {isCopySuccess && <p>Copied!</p>}
+    </div>
+  );
+};
+```
