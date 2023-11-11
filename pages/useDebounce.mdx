@@ -1,24 +1,59 @@
 # useDebounce
 
-Debounce a value or a callback, which delays the execution until after a specified wait time. This hook is ideal for performing tasks like API calls in response to user input.
+The `useDebounce` hook is designed to limit the rate at which a function is called. This can be particularly useful for handling rapid calls to expensive operations such as API calls, search queries, or any function that you want to limit the frequency of execution.
 
-```jsx
-import { useState } from 'react';
+## Interface
+
+```typescript
+interface UseDebounceProps<T> {
+  value: T;
+  delay: number;
+  callback?: (value: T) => void;
+}
+```
+
+The `UseDebounceProps` interface allows you to specify:
+
+- value: The value that you want to debounce.
+- delay: The number of milliseconds to wait before the latest value is set.
+- callback: An optional function that will be called with the debounced value after the specified delay.
+
+## Usage
+
+To use `useDebounce`, provide it with the value you want to debounce and the delay in milliseconds. If you have a callback function, it will be called after the delay period has passed and only if the value has changed.
+
+Here's an example showing how to debounce a search input:
+
+```jsximport { useState } from 'react';
 import { useDebounce } from 'hooked-on-react';
 
 const SearchInput = () => {
-  const [value, setValue] = useState('');
-  const debouncedValue = useDebounce(value, 500);
+  const [inputValue, setInputValue] = useState('');
+  const debouncedSearch = useDebounce({ value: inputValue, delay: 500 });
 
-  // Use debouncedValue for API calls or expensive operations
+  // Use the debounced value for triggering API calls
+  useEffect(() => {
+    const search = async () => {
+      if (debouncedSearch) {
+        console.log(`Searching for: ${debouncedSearch}`);
+        // Trigger the search operation (API call or other)
+      }
+    };
+
+    search();
+  }, [debouncedSearch]);
 
   return (
     <input
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
+      type="text"
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
       placeholder="Search..."
     />
   );
 };
 
 ```
+
+In this SearchInput component, the user's input is debounced by 500 milliseconds. The search operation is only triggered after this period, reducing the frequency of function calls and potentially unnecessary operations.
+

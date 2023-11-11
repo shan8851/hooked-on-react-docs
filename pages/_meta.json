@@ -4,6 +4,7 @@
   "useDebounce": "useDebounce",
   "useLocalStorage": "useLocalStorage",
   "useCopyText": "useCopyText",
+  "useCountdown": "useCountdown",
   "contact": {
     "title": "Contact ↗",
     "type": "page",

@@ -1,0 +1,64 @@
+# useCountdown
+
+The `useCountdown` hook offers a customizable countdown timer with start, pause, reset, and time adjustment capabilities. It's ideal for creating countdown features in your application, such as timers for quizzes, games, or any scenario where you need to count down to an event.
+
+## Interface
+
+```typescript
+interface UseCountdownProps {
+  initialTime: number; // The initial time in seconds for the countdown
+  interval?: number; // The countdown interval in milliseconds (default is 1000ms)
+  onTick?: (timeLeft: number) => void; // Callback function called every interval with the time remaining
+  onCompleted?: () => void; // Callback function called when the countdown reaches zero
+}
+
+interface UseCountdownReturn {
+  timeRemaining: number;
+  start: () => void;
+  pause: () => void;
+  reset: () => void;
+  addTime: (seconds: number) => void;
+  subtractTime: (seconds: number) => void;
+}
+```
+
+The `UseCountdownProps` interface allows you to configure the initial setup of the countdown, and `UseCountdownReturn` provides control functions and the current state of the countdown timer.
+
+## Usage
+
+To use useCountdown, supply the initial time for the countdown and optionally define the interval, onTick, and onCompleted callbacks. You can then control the countdown using the functions provided in the return object.
+
+Here's a practical example of `useCountdown` in a component:
+
+```jsx
+import { useCountdown } from 'hooked-on-react';
+
+const CountdownTimer = () => {
+  const {
+    timeRemaining,
+    start,
+    pause,
+    reset,
+    addTime,
+    subtractTime
+  } = useCountdown({
+    initialTime: 60, // 60 seconds countdown
+    onTick: (timeLeft) => console.log(`${timeLeft} seconds remaining`),
+    onCompleted: () => console.log('Countdown finished!')
+  });
+
+  return (
+    <div>
+      <p>Time Remaining: {timeRemaining}</p>
+      <button onClick={start}>Start</button>
+      <button onClick={pause}>Pause</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={() => addTime(5)}>Add 5 Seconds</button>
+      <button onClick={() => subtractTime(5)}>Subtract 5 Seconds</button>
+    </div>
+  );
+};
+
+```
+
+In this `CountdownTimer` component, the `useCountdown` hook manages a 60-second countdown. The `start`, `pause`, `reset`, `addTime`, and `subtractTime` functions provide the user with full control over the countdown timer. The `onTick` callback logs the remaining time every second, and the `onCompleted` callback logs a message when the countdown finishes.

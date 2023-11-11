@@ -1,6 +1,28 @@
 # useCopyText
 
-Copy text to the clipboard with ease. useCopyText provides a simple API to copy text to the user's clipboard, with feedback on whether the copy was successful.
+The `useCopyText` hook provides a straightforward interface for copying text to the clipboard. It offers a simple way to trigger copy operations with feedback on the operation's success or failure.
+
+## Interface
+
+```typescript
+interface UseCopyTextReturn {
+  copiedText: string;
+  isCopySuccess: boolean | null;
+  copy: (text: string) => void;
+  error: Error | null;
+}
+```
+The `UseCopyTextReturn` interface details the structure of the object returned by useCopyText. It includes:
+
+- copiedText: The last text that was attempted to be copied.
+- isCopySuccess: A boolean that indicates whether the last copy attempt was successful.
+- copy: A function that takes a string and attempts to copy it to the clipboard.
+- error: An error object that captures any issues encountered during the copy operation.
+
+
+## Usage
+
+Below is an example demonstrating how to use useCopyText to copy text from an input field to the clipboard and provide user feedback.
 
 ```jsx
 import { useState } from 'react';
@@ -8,7 +30,7 @@ import { useCopyText } from 'hooked-on-react';
 
 const CopyExample = () => {
   const [text, setText] = useState('Hello, world!');
-  const { copy, isCopySuccess } = useCopyText();
+  const { copy, isCopySuccess, error } = useCopyText();
 
   const handleCopy = () => {
     copy(text);
@@ -24,7 +46,9 @@ const CopyExample = () => {
       />
       <button onClick={handleCopy}>Copy to Clipboard</button>
       {isCopySuccess && <p>Copied!</p>}
+      {error && <p>Failed to copy: {error.message}</p>}
     </div>
   );
 };
 ```
+In this example, `copy` is used to initiate the copy to clipboard operation, and `isCopySuccess` provides immediate feedback to the user. The error state is used to display any errors that may occur during the copy process, allowing for graceful error handling within the UI.

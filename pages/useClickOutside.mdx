@@ -1,25 +1,49 @@
 # useClickOutside
 
-Detect clicks outside a specified element. This is particularly useful for closing modal windows, dropdowns, or resetting states when the user clicks outside of a component.
+The `useClickOutside` hook is designed to detect and respond to clicks outside a specified DOM element. This can be particularly useful for closing modal dialogs, dropdown menus, or resetting state when the user interacts with the rest of your application.
+
+## Interface
+
+```typescript
+interface UseClickOutsideProps {
+  ref: RefObject<HTMLElement>;
+  callback: (event: MouseEvent | TouchEvent) => void;
+}
+```
+
+The `UseClickOutsideProps` interface requires:
+
+- ref: A `RefObject` pointing to the element you want to monitor.
+- callback: A function that will be called whenever a click occurs outside of the referenced element.
+
+## Usage
+
+To use `useClickOutside`, pass it a reference to the element you want to monitor and a callback function. The callback will be invoked whenever a user clicks outside of the referenced element.
+
+Here's an example of how to use `useClickOutside` within a component:
+
 
 ```jsx
 import { useRef } from 'react';
 import { useClickOutside } from 'hooked-on-react';
 
-const SomeComponent = () => {
-  const ref = useRef();
+const Dropdown = ({ isOpen, onClose }) => {
+  const dropdownRef = useRef(null);
 
-  useClickOutside(ref, () => {
-    // Your custom logic here
-    console.log('Clicked outside');
+  useClickOutside(dropdownRef, (event) => {
+    // If the dropdown is open and the click is outside, close it
+    if (isOpen) {
+      onClose();
+    }
   });
 
   return (
-    <div>
-      <div ref={ref}>
-        <p>Click outside of this element to trigger the callback</p>
-      </div>
+    <div ref={dropdownRef} className={`dropdown ${isOpen ? 'open' : ''}`}>
+      {/* Dropdown content here */}
     </div>
   );
 };
+
 ```
+
+In this Dropdown component example, `useClickOutside` is used to detect if a click occurs outside of the dropdown. If the click is outside and the dropdown is open, the onClose function is called, which should close the dropdown.

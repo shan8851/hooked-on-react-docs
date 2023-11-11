@@ -1,13 +1,39 @@
 # useLocalStorage
 
-The `useLocalStorage` hook simplifies the synchronisation of the component state with the browser's `localStorage`. It allows you to persist, update, and delete a value through the `localStorage` API, ensuring that the state persists across browser sessions.
+The `useLocalStorage` hook provides an interface to the browser's `localStorage` API, enabling the persistent storage of state across browser sessions. It allows for the retrieval, updating, and deletion of stored values, with the added benefit of reacting to and handling errors that may occur during `localStorage` operations.
 
+## Interface
+
+```typescript
+interface UseLocalStorageReturn<T> {
+  storedValue: T | undefined;
+  setValue: (value: T | ((val: T | undefined) => T | undefined)) => void;
+  deleteValue: () => void;
+  error: Error | null;
+}
+```
+
+The `UseLocalStorageReturn` interface outlines the structure of the object returned by useLocalStorage. It includes:
+
+- storedValue: The current value retrieved from localStorage.
+- setValue: A function to update the value in localStorage.
+- deleteValue: A function to remove the value from localStorage.
+- error: Captures any errors from localStorage operations.
+
+## Usage
+
+Below is an example demonstrating how to use useLocalStorage to store, update, and delete user settings.
 
 ```jsx
 import { useLocalStorage } from 'hooked-on-react';
 
 const UserSettings = () => {
-  const { storedValue: settings, setValue: setSettings, deleteValue: clearSettings } = useLocalStorage('settings', {});
+  const {
+    storedValue: settings,
+    setValue: setSettings,
+    deleteValue: clearSettings,
+    error
+  } = useLocalStorage('settings', {});
 
   const updateSettings = (newSettings) => {
     setSettings((prevSettings) => ({ ...prevSettings, ...newSettings }));
@@ -26,8 +52,12 @@ const UserSettings = () => {
       <button onClick={() => handleThemeChange('dark')}>Dark Theme</button>
       <button onClick={() => handleThemeChange('light')}>Light Theme</button>
       <button onClick={handleClearSettings}>Clear Settings</button>
+      {error && <p>Error: {error.message}</p>}
       {settings && <pre>{JSON.stringify(settings, null, 2)}</pre>}
     </div>
   );
 };
+
 ```
+
+In this example, `settings` is used to store and retrieve user preferences such as themes. The `updateSettings` function demonstrates how to merge new settings into the existing ones, while `handleClearSettings` showcases the deletion of the stored settings. The example also demonstrates how to handle and display any potential errors that might arise from localStorage operations.
