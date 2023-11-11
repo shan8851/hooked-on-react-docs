@@ -4,7 +4,7 @@ The `useCopyText` hook provides a straightforward interface for copying text to 
 
 ## Interface
 
-```typescript
+```typescript copy filename="types.ts"
 interface UseCopyTextReturn {
   copiedText: string;
   isCopySuccess: boolean | null;
@@ -24,7 +24,7 @@ The `UseCopyTextReturn` interface details the structure of the object returned b
 
 Below is an example demonstrating how to use useCopyText to copy text from an input field to the clipboard and provide user feedback.
 
-```jsx
+```jsx filname="CopyExample.tsx" copy
 import { useState } from 'react';
 import { useCopyText } from 'hooked-on-react';
 

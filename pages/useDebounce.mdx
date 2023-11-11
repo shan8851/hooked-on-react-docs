@@ -4,7 +4,7 @@ The `useDebounce` hook is designed to limit the rate at which a function is call
 
 ## Interface
 
-```typescript
+```typescript copy filename="types.ts"
 interface UseDebounceProps<T> {
   value: T;
   delay: number;
@@ -24,7 +24,8 @@ To use `useDebounce`, provide it with the value you want to debounce and the del
 
 Here's an example showing how to debounce a search input:
 
-```jsximport { useState } from 'react';
+```jsx filename="SearchInput.tsx" copy
+import { useState } from 'react';
 import { useDebounce } from 'hooked-on-react';
 
 const SearchInput = () => {

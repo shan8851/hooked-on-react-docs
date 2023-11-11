@@ -4,7 +4,7 @@ The `useClickOutside` hook is designed to detect and respond to clicks outside a
 
 ## Interface
 
-```typescript
+```typescript copy filename="types.ts"
 interface UseClickOutsideProps {
   ref: RefObject<HTMLElement>;
   callback: (event: MouseEvent | TouchEvent) => void;
@@ -23,7 +23,7 @@ To use `useClickOutside`, pass it a reference to the element you want to monitor
 Here's an example of how to use `useClickOutside` within a component:
 
 
-```jsx
+```jsx filename="Dropdown.tsx" copy
 import { useRef } from 'react';
 import { useClickOutside } from 'hooked-on-react';
 

@@ -2,16 +2,22 @@
 
 The `useCountdown` hook offers a customizable countdown timer with start, pause, reset, and time adjustment capabilities. It's ideal for creating countdown features in your application, such as timers for quizzes, games, or any scenario where you need to count down to an event.
 
-## Interface
+## Interfaces
 
-```typescript
+### UseCountdownProps
+
+```typescript copy filename="types.ts"
 interface UseCountdownProps {
   initialTime: number; // The initial time in seconds for the countdown
   interval?: number; // The countdown interval in milliseconds (default is 1000ms)
   onTick?: (timeLeft: number) => void; // Callback function called every interval with the time remaining
   onCompleted?: () => void; // Callback function called when the countdown reaches zero
 }
+```
 
+### UseCountdownReturn
+
+```typescript copy filename="types.ts"
 interface UseCountdownReturn {
   timeRemaining: number;
   start: () => void;
@@ -30,7 +36,7 @@ To use useCountdown, supply the initial time for the countdown and optionally de
 
 Here's a practical example of `useCountdown` in a component:
 
-```jsx
+```jsx filename="CountdownTimer.tsx" copy
 import { useCountdown } from 'hooked-on-react';
 
 const CountdownTimer = () => {

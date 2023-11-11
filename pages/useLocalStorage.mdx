@@ -4,7 +4,7 @@ The `useLocalStorage` hook provides an interface to the browser's `localStorage`
 
 ## Interface
 
-```typescript
+```typescript copy filename="types.ts"
 interface UseLocalStorageReturn<T> {
   storedValue: T | undefined;
   setValue: (value: T | ((val: T | undefined) => T | undefined)) => void;
@@ -24,7 +24,7 @@ The `UseLocalStorageReturn` interface outlines the structure of the object retur
 
 Below is an example demonstrating how to use useLocalStorage to store, update, and delete user settings.
 
-```jsx
+```jsx filename="settings.tsx" copy
 import { useLocalStorage } from 'hooked-on-react';
 
 const UserSettings = () => {
