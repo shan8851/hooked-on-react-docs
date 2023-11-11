@@ -1,8 +1,8 @@
-# Hooked-on-React Docs
+# hooked-on-react Docs
 
 This repository contains the documentation for [hooked-on-react](https://github.com/shan8851/hooked-on-react), a custom React hooks library designed to accelerate development and enhance user experience with handy type safe custom hooks.
 
-## About Hooked-on-React
+## About hooked-on-react
 
 hooked-on-react is an open-source project that provides developers with a suite of hooks to solve common problems and streamline the development process within React applications. The hooks are easy to integrate and aim to be as reusable and composable as possible.
 
@@ -10,7 +10,7 @@ hooked-on-react is an open-source project that provides developers with a suite 
 
 The documentation is created to help you understand and make the most out of each hook. It includes basic examples, API descriptions, and general usage patterns.
 
-This documentation is built using [Nextra](https://nextra.vercel.app/), a Next.js and MDX powered, no-code site generator.
+This documentation is built using [Nextra](https://nextra.vercel.app/), a Next.js and MDX powered, no-code site generator. If you haven't used and and are a fan of Next and MDX, I highly recommend checking it out.
 
 ## Viewing the Documentation
 
